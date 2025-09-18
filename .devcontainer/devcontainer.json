@@ -1,47 +1,37 @@
 {
-  "name": "Laravel 12 - Codespaces",
-  "image": "mcr.microsoft.com/devcontainers/php:8.3",
+  "name": "Codespaces + Docker (Sail)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": true
+    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
     },
-    "ghcr.io/devcontainers/features/mysql:1": {
-      "version": "8.0",
-      "mysqlDb": "laravel",
-      "mysqlUser": "laravel",
-      "mysqlPassword": "laravel"
-    },
-    "ghcr.io/devcontainers/features/redis:1": {}
-  },
-  "forwardPorts": [8000, 5173, 3306],
-  "portsAttributes": {
-    "8000": { "label": "Laravel", "onAutoForward": "openBrowser" },
-    "5173": { "label": "Vite HMR", "onAutoForward": "silent" }
+    "ghcr.io/devcontainers/features/git:1": {}
   },
   "remoteUser": "vscode",
-  "postCreateCommand": "bash .devcontainer/scripts/postCreate.sh",
-  "postStartCommand": "bash .devcontainer/scripts/postStart.sh",
+  "forwardPorts": [80, 5173, 3306, 6379, 8025],
+  "portsAttributes": {
+    "80":   { "label": "Laravel (Nginx)", "onAutoForward": "openBrowser" },
+    "5173": { "label": "Vite HMR",       "onAutoForward": "silent" },
+    "8025": { "label": "Mailpit",         "onAutoForward": "silent" }
+  },
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "postStartCommand": "bash .devcontainer/postStart.sh",
   "customizations": {
     "vscode": {
       "extensions": [
-        "bmewburn.vscode-intelephense-client",
-        "xdebug.php-pack",
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions",
         "onecentlin.laravel-blade",
         "amiralizadeh9480.laravel-extra-intellisense",
-        "codingyu.laravel-goto-view",
-        "ryannaddy.laravel-artisan",
-        "ms-azuretools.vscode-docker",
-        "github.vscode-github-actions"
+        "ryannaddy.laravel-artisan"
       ],
       "settings": {
-        "intelephense.environment.phpVersion": "8.3",
-        "editor.formatOnSave": true,
-        "php.validate.executablePath": "/usr/local/bin/php",
-        "files.exclude": {
-          "**/vendor": true,
-          "**/node_modules": true
-        }
+        "editor.formatOnSave": true
       }
     }
   }
 }
+
