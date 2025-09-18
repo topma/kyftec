@@ -1,0 +1,47 @@
+{
+  "name": "Laravel 12 - Codespaces",
+  "image": "mcr.microsoft.com/devcontainers/php:8.3",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "8.0",
+      "mysqlDb": "laravel",
+      "mysqlUser": "laravel",
+      "mysqlPassword": "laravel"
+    },
+    "ghcr.io/devcontainers/features/redis:1": {}
+  },
+  "forwardPorts": [8000, 5173, 3306],
+  "portsAttributes": {
+    "8000": { "label": "Laravel", "onAutoForward": "openBrowser" },
+    "5173": { "label": "Vite HMR", "onAutoForward": "silent" }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "bash .devcontainer/scripts/postCreate.sh",
+  "postStartCommand": "bash .devcontainer/scripts/postStart.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-pack",
+        "onecentlin.laravel-blade",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "codingyu.laravel-goto-view",
+        "ryannaddy.laravel-artisan",
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions"
+      ],
+      "settings": {
+        "intelephense.environment.phpVersion": "8.3",
+        "editor.formatOnSave": true,
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "files.exclude": {
+          "**/vendor": true,
+          "**/node_modules": true
+        }
+      }
+    }
+  }
+}
